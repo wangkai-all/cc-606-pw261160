@@ -1,0 +1,14 @@
+{
+  "name": "night-market-stall-utilization",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "登记表驱动的夜市摊位利用率本地分析台（仅 Node.js 内置模块）",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.11"
+  }
+}

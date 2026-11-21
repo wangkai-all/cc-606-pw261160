@@ -1,0 +1,337 @@
+{
+  "site": {
+    "name": "青禾夜市",
+    "timezone": "Asia/Shanghai",
+    "note": "所有时间均为 +08:00 当地营业时间；跨零点营业日以开市日期命名。"
+  },
+  "openingHours": {
+    "byWeekday": {
+      "0": {
+        "open": "17:30",
+        "close": "23:30"
+      },
+      "1": {
+        "open": "18:00",
+        "close": "23:00"
+      },
+      "2": {
+        "open": "18:00",
+        "close": "23:00"
+      },
+      "3": {
+        "open": "18:00",
+        "close": "00:00"
+      },
+      "4": {
+        "open": "18:00",
+        "close": "00:30"
+      },
+      "5": {
+        "open": "18:00",
+        "close": "00:30"
+      },
+      "6": {
+        "open": "17:30",
+        "close": "01:00"
+      }
+    },
+    "overrides": [
+      {
+        "date": "2026-11-21",
+        "open": "17:30",
+        "close": "01:30",
+        "note": "夜市周年庆延时收市"
+      },
+      {
+        "date": "2026-11-24",
+        "open": "18:00",
+        "close": "22:00",
+        "note": "设备年检提前收市"
+      }
+    ]
+  },
+  "areas": [
+    {
+      "id": "A",
+      "name": "东侧熟食区"
+    },
+    {
+      "id": "B",
+      "name": "西侧百货区"
+    },
+    {
+      "id": "C",
+      "name": "南广场饮品区"
+    }
+  ],
+  "stalls": [
+    {
+      "id": "S-A01",
+      "name": "老陈烤串",
+      "areaId": "A",
+      "weekdays": [
+        3,
+        4,
+        5,
+        6,
+        0
+      ],
+      "hours": {
+        "default": {
+          "open": "18:30",
+          "close": "23:30"
+        }
+      },
+      "note": "周三至周日经营"
+    },
+    {
+      "id": "S-A02",
+      "name": "阿七铁板烧",
+      "areaId": "A",
+      "weekdays": [
+        4,
+        5,
+        6
+      ],
+      "scheduleChanges": [
+        {
+          "effective": "2026-11-19",
+          "weekdays": [
+            4,
+            5,
+            6,
+            0
+          ],
+          "note": "11 月 19 日起增开周日"
+        }
+      ],
+      "hours": {
+        "default": {
+          "open": "18:00",
+          "close": "23:30"
+        },
+        "byWeekday": {
+          "5": {
+            "open": "18:00",
+            "close": "00:30"
+          },
+          "6": {
+            "open": "18:00",
+            "close": "01:00"
+          }
+        }
+      },
+      "note": "周五、周六跨零点收摊"
+    },
+    {
+      "id": "S-A03",
+      "name": "三姐卤味",
+      "areaId": "A",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": {
+        "default": {
+          "open": "17:30",
+          "close": "23:00"
+        }
+      }
+    },
+    {
+      "id": "S-A04",
+      "name": "石头炒粉",
+      "areaId": "A",
+      "weekdays": [
+        4,
+        5,
+        6,
+        0
+      ],
+      "hours": {
+        "default": {
+          "open": "18:00",
+          "close": "00:00"
+        }
+      }
+    },
+    {
+      "id": "S-B01",
+      "name": "王婶糖水",
+      "areaId": "B",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": {
+        "default": {
+          "open": "17:30",
+          "close": "23:30"
+        }
+      }
+    },
+    {
+      "id": "S-B02",
+      "name": "小林手作",
+      "areaId": "B",
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": {
+        "default": {
+          "open": "18:00",
+          "close": "22:30"
+        }
+      }
+    },
+    {
+      "id": "S-B03",
+      "name": "阿珍杂货",
+      "areaId": "B",
+      "weekdays": [
+        5,
+        6,
+        0
+      ],
+      "hours": {
+        "default": {
+          "open": "18:00",
+          "close": "23:00"
+        }
+      }
+    },
+    {
+      "id": "S-C01",
+      "name": "山岚咖啡车",
+      "areaId": "C",
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": {
+        "default": {
+          "open": "18:00",
+          "close": "23:30"
+        }
+      }
+    },
+    {
+      "id": "S-C02",
+      "name": "稻草人手打柠茶",
+      "areaId": "C",
+      "weekdays": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "hours": {
+        "default": {
+          "open": "18:30",
+          "close": "00:00"
+        }
+      }
+    },
+    {
+      "id": "S-C03",
+      "name": "半山豆乳",
+      "areaId": "C",
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "hours": {
+        "default": {
+          "open": "18:00",
+          "close": "23:00"
+        }
+      }
+    }
+  ],
+  "closures": [
+    {
+      "id": "CL-R01",
+      "kind": "registered",
+      "scope": "stall",
+      "stallId": "S-A03",
+      "nightKey": "2026-11-19",
+      "startClock": "20:00",
+      "endClock": "22:00",
+      "reason": "家中有事，登记临时停业两小时",
+      "recordedAt": "2026-11-18T12:10:00+08:00"
+    },
+    {
+      "id": "CL-R02",
+      "kind": "registered",
+      "scope": "area",
+      "areaId": "C",
+      "nightKey": "2026-11-22",
+      "startClock": "21:00",
+      "endClock": "22:30",
+      "reason": "南广场临时检修线路（区域停业）",
+      "recordedAt": "2026-11-21T16:40:00+08:00"
+    },
+    {
+      "id": "CL-R03",
+      "kind": "registered",
+      "scope": "stall",
+      "stallId": "S-B01",
+      "nightKey": "2026-11-24",
+      "startClock": "17:30",
+      "endClock": "19:00",
+      "reason": "进货延误，晚开一小时半",
+      "recordedAt": "2026-11-23T20:05:00+08:00"
+    },
+    {
+      "id": "CL-M01",
+      "kind": "mirror-inferred",
+      "scope": "stall",
+      "stallId": "S-A01",
+      "nightKey": "2026-11-19",
+      "resumeClock": "21:00",
+      "reason": "燃气灶具故障，登记只记下 21:00 恢复营业，结束时刻待补",
+      "recordedAt": "2026-11-20T09:20:00+08:00"
+    }
+  ],
+  "expectations": {
+    "crossMidnightTransaction": {
+      "transactionId": "TX-20261121-0597",
+      "stallId": "S-A02",
+      "ticketDate": "2026-11-21",
+      "expectedNightKey": "2026-11-20",
+      "note": "00:15 售出的小票属于 11-20 开市的营业日，不能按日期裂成 11-21 的另一场"
+    },
+    "mirrorClosure": {
+      "closureId": "CL-M01",
+      "stallId": "S-A01",
+      "nightKey": "2026-11-19",
+      "resumeClock": "21:00",
+      "reason": "燃气灶具临时故障（补录示例）",
+      "note": "同一场次、同一摊位；回查受影响班次与票面归属"
+    },
+    "postingNote": "登记表要求逐票入账；同一交易只归属一个营业日。"
+  }
+}

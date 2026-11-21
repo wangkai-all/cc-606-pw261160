@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>青禾夜市 · 摊位利用率分析台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#result">跳到业务结果</a>
+    <header class="page-head">
+      <div class="head-main">
+        <p class="eyebrow">登记表驱动的本地分析台</p>
+        <h1>青禾夜市 · 摊位利用率</h1>
+        <p class="lede">
+          按票入账，营业日以开市日期命名；跨零点的夜市仍算同一场。摊位是否可经营，
+          由登记表的营业时间与临时停业共同决定。
+        </p>
+      </div>
+      <dl class="window-card" aria-label="当前分析窗口">
+        <div>
+          <dt>分析窗口</dt>
+          <dd id="window-label">加载中…</dd>
+        </div>
+        <div>
+          <dt>登记表</dt>
+          <dd id="register-label">data/venue.json</dd>
+        </div>
+        <div>
+          <dt>票数</dt>
+          <dd id="ticket-total">—</dd>
+        </div>
+      </dl>
+    </header>
+
+    <main>
+      <section class="filters" aria-label="分析窗口">
+        <label>
+          <span>开始日期（含）</span>
+          <input type="date" id="window-from" value="2026-11-16" />
+        </label>
+        <label>
+          <span>结束日期（不含）</span>
+          <input type="date" id="window-to" value="2026-11-25" />
+        </label>
+        <button type="button" class="btn ghost compact" id="btn-apply-window">应用窗口</button>
+        <p class="filter-note">营业日以开市日期命名；窗口只裁掉窗口外的场次，跨零点的场次仍保持完整。</p>
+      </section>
+
+      <section class="actions" aria-label="分析操作">
+        <button type="button" id="btn-analysis" class="btn primary" data-action="analysis">
+          <span class="btn-title">运行原营业分析</span>
+          <span class="btn-sub">按登记营业时间逐场计算</span>
+        </button>
+        <button type="button" id="btn-backfill-open" class="btn" data-action="backfill">
+          <span class="btn-title">补交临时停业</span>
+          <span class="btn-sub">补录后回查受影响班次</span>
+        </button>
+        <button type="button" id="btn-availability" class="btn" data-action="availability">
+          <span class="btn-title">查看可用时段分母</span>
+          <span class="btn-sub">真正可经营的分钟数</span>
+        </button>
+        <p class="action-note" id="action-status" role="status" aria-live="polite">
+          尚未运行。结果区会在每次操作后由实际处理重新生成。
+        </p>
+      </section>
+
+      <section
+        id="result"
+        class="result"
+        data-evidence-result="idle"
+        data-result-kind="none"
+        aria-labelledby="result-title"
+        aria-live="polite"
+      >
+        <div class="result-head">
+          <h2 id="result-title">业务结果</h2>
+          <p class="digest" id="evidence-digest">证据摘要：—</p>
+        </div>
+        <div id="result-body" class="result-body">
+          <p class="empty">
+            点击「运行原营业分析」，结果会依据
+            <code>data/venue.json</code> 与 <code>data/transactions.json</code> 实际计算后显示。
+          </p>
+        </div>
+      </section>
+
+      <section class="backfill-panel" id="backfill-panel" hidden aria-labelledby="backfill-title">
+        <div class="panel-head">
+          <h2 id="backfill-title">补交临时停业</h2>
+          <p>补录会即时修订可用时段分母，并回查同一营业日内受影响的班次与票面归属。</p>
+        </div>
+        <form id="backfill-form" class="form-grid" novalidate>
+          <label>
+            <span>作用范围</span>
+            <select name="scope" id="scope-select">
+              <option value="stall">单个摊位</option>
+              <option value="area">整个区域</option>
+              <option value="venue">全场</option>
+            </select>
+          </label>
+          <label class="stall-field">
+            <span>摊位</span>
+            <select name="stallId" id="stall-select"></select>
+          </label>
+          <label class="area-field" hidden>
+            <span>区域</span>
+            <select name="areaId" id="area-select"></select>
+          </label>
+          <label>
+            <span>营业日（开市日期）</span>
+            <select name="nightKey" id="night-select"></select>
+          </label>
+          <label>
+            <span>登记形态</span>
+            <select name="kind" id="kind-select">
+              <option value="registered">起止时刻齐全</option>
+              <option value="mirror-inferred">缺结束时刻，按恢复营业点推导</option>
+            </select>
+          </label>
+          <label class="start-field">
+            <span>停业开始</span>
+            <input name="startClock" id="start-clock" type="time" value="20:00" step="300" />
+          </label>
+          <label class="end-field">
+            <span>停业结束</span>
+            <input name="endClock" id="end-clock" type="time" value="21:00" step="300" />
+          </label>
+          <label class="resume-field" hidden>
+            <span>恢复营业时刻</span>
+            <input name="resumeClock" id="resume-clock" type="time" value="21:00" step="300" />
+          </label>
+          <label class="reason-field">
+            <span>停业原因</span>
+            <input
+              name="reason"
+              id="reason-input"
+              type="text"
+              maxlength="200"
+              placeholder="例如：燃气灶具临时故障"
+              value="燃气灶具临时故障（补录示例）"
+            />
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn primary" id="btn-submit-backfill">提交补录并回查</button>
+            <button type="button" class="btn ghost" id="btn-cancel-backfill">收起</button>
+          </div>
+        </form>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+      </section>
+    </main>
+
+    <footer class="page-foot">
+      <p>
+        全部计算在本地完成，仅使用 Node.js 内置模块。营业日以开市日期命名，跨零点不会拆成两场。
+      </p>
+    </footer>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
